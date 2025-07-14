@@ -26,6 +26,7 @@ export default function CameraView({
     selectedFrame,
     frameScale,
     showFrame,
+    activeDragMode,
   } = useCameraStore();
 
   const videoConstraints = {
@@ -53,12 +54,13 @@ export default function CameraView({
         </div>
       )}
 
-      {/* 可拖动和缩放的人物 */}
+      {/* 可拖动和缩放的人物 (前景) */}
       {showCharacter && (
         <motion.div
-          drag
-          dragConstraints={containerRef}
-          className="absolute top-1/4 left-1/4 w-1/2 h-auto z-10 cursor-move"
+          drag={activeDragMode === "character"}
+          className={`absolute top-1/4 left-1/4 w-1/2 h-auto z-20 ${
+            activeDragMode === "character" ? "cursor-move" : "cursor-default"
+          }`}
           style={{ scale: characterScale }}
         >
           <img
@@ -70,12 +72,14 @@ export default function CameraView({
         </motion.div>
       )}
 
-      {/* 可拖动和缩放的框架图 */}
+      {/* 可拖动和缩放的框架图 (背景) */}
       {showFrame && (
         <motion.div
-          drag
+          drag={activeDragMode === "frame"}
           dragConstraints={containerRef}
-          className="absolute inset-0 w-full h-full z-20 cursor-move"
+          className={`absolute inset-0 w-full h-full z-10 ${
+            activeDragMode === "frame" ? "cursor-move" : "cursor-default"
+          }`}
           style={{ scale: frameScale }}
         >
           <img

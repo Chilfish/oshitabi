@@ -1,5 +1,8 @@
 import { create } from "zustand";
 
+type DragMode = "character" | "frame" | "none";
+type TabType = "character" | "frame";
+
 interface CameraState {
   // 拍照相关状态
   capturedImage: string | null;
@@ -16,6 +19,12 @@ interface CameraState {
   frameScale: number;
   showFrame: boolean;
 
+  // 拖拽模式状态
+  activeDragMode: DragMode;
+
+  // 当前激活的标签页
+  activeTab: TabType;
+
   // 操作方法
   setCapturedImage: (image: string | null) => void;
   setFacingMode: (mode: "user" | "environment") => void;
@@ -26,6 +35,8 @@ interface CameraState {
   setSelectedFrame: (frame: string) => void;
   setFrameScale: (scale: number) => void;
   setShowFrame: (show: boolean) => void;
+  setActiveDragMode: (mode: DragMode) => void;
+  setActiveTab: (tab: TabType) => void;
   switchCamera: () => void;
   resetCamera: () => void;
 }
@@ -33,7 +44,7 @@ interface CameraState {
 // 预设角色列表
 export const PRESET_CHARACTERS = [
   { id: "character1", name: "角色1", src: "/tomori.png" },
-  // { id: "character2", name: "角色2", src: "/anon.png" },
+  { id: "character2", name: "角色2", src: "/mashiro.jpg" },
   // { id: "character3", name: "角色3", src: "/rana.png" },
   // { id: "character4", name: "角色4", src: "/soyo.png" },
   // { id: "character5", name: "角色5", src: "/taki.png" },
@@ -60,6 +71,8 @@ export const useCameraStore = create<CameraState>((set) => ({
   selectedFrame: PRESET_FRAMES[0].src,
   frameScale: 1,
   showFrame: true,
+  activeDragMode: "none",
+  activeTab: "character",
 
   // 操作方法
   setCapturedImage: (image) => set({ capturedImage: image }),
@@ -71,6 +84,12 @@ export const useCameraStore = create<CameraState>((set) => ({
   setSelectedFrame: (frame) => set({ selectedFrame: frame }),
   setFrameScale: (scale) => set({ frameScale: scale }),
   setShowFrame: (show) => set({ showFrame: show }),
+  setActiveDragMode: (mode) => set({ activeDragMode: mode }),
+  setActiveTab: (tab) =>
+    set({
+      activeTab: tab,
+      activeDragMode: tab,
+    }),
 
   switchCamera: () =>
     set((state) => ({
@@ -83,5 +102,6 @@ export const useCameraStore = create<CameraState>((set) => ({
       characterScale: 1,
       frameScale: 1,
       isCameraReady: false,
+      activeDragMode: "none",
     }),
 }));
