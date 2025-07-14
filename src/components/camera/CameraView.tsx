@@ -6,6 +6,7 @@ interface CameraViewProps {
   webcamRef: React.RefObject<Webcam | null>;
   containerRef: React.RefObject<HTMLDivElement | null>;
   characterRef: React.RefObject<HTMLImageElement | null>;
+  frameRef: React.RefObject<HTMLImageElement | null>;
   onUserMedia: () => void;
 }
 
@@ -13,10 +14,19 @@ export default function CameraView({
   webcamRef,
   containerRef,
   characterRef,
+  frameRef,
   onUserMedia,
 }: CameraViewProps) {
-  const { facingMode, isCameraReady, selectedCharacter, characterScale } =
-    useCameraStore();
+  const {
+    facingMode,
+    isCameraReady,
+    selectedCharacter,
+    characterScale,
+    showCharacter,
+    selectedFrame,
+    frameScale,
+    showFrame,
+  } = useCameraStore();
 
   const videoConstraints = {
     width: { ideal: 1920 },
@@ -43,27 +53,39 @@ export default function CameraView({
         </div>
       )}
 
-      {/* 固定的框架图 */}
-      <img
-        src="/frame.png"
-        alt="Frame"
-        className="absolute inset-0 w-full h-full pointer-events-none z-20"
-      />
-
       {/* 可拖动和缩放的人物 */}
-      <motion.div
-        drag
-        dragConstraints={containerRef}
-        className="absolute top-1/4 left-1/4 w-1/2 h-auto z-10 cursor-move"
-        style={{ scale: characterScale }}
-      >
-        <img
-          ref={characterRef}
-          src={selectedCharacter}
-          alt="Character"
-          className="w-full h-full pointer-events-none"
-        />
-      </motion.div>
+      {showCharacter && (
+        <motion.div
+          drag
+          dragConstraints={containerRef}
+          className="absolute top-1/4 left-1/4 w-1/2 h-auto z-10 cursor-move"
+          style={{ scale: characterScale }}
+        >
+          <img
+            ref={characterRef}
+            src={selectedCharacter}
+            alt="Character"
+            className="w-full h-full pointer-events-none"
+          />
+        </motion.div>
+      )}
+
+      {/* 可拖动和缩放的框架图 */}
+      {showFrame && (
+        <motion.div
+          drag
+          dragConstraints={containerRef}
+          className="absolute inset-0 w-full h-full z-20 cursor-move"
+          style={{ scale: frameScale }}
+        >
+          <img
+            ref={frameRef}
+            src={selectedFrame}
+            alt="Frame"
+            className="w-full h-full pointer-events-none"
+          />
+        </motion.div>
+      )}
     </>
   );
 }

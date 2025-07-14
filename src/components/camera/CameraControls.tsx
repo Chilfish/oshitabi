@@ -10,7 +10,7 @@ export default function CameraControls({ onTakePhoto }: CameraControlsProps) {
   const { isCameraReady, switchCamera } = useCameraStore();
 
   return (
-    <div className="flex justify-around items-center">
+    <div className="flex justify-around items-center my-4">
       {/* 占位符，保持拍照按钮居中 */}
       <div className="w-12 h-12 bg-amber-50 rounded-2xl" />
       <Button

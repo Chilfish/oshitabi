@@ -1,22 +1,18 @@
-import { Check, Upload } from "lucide-react";
+import { Check, Upload, X } from "lucide-react";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { PRESET_CHARACTERS, useCameraStore } from "@/stores/cameraStore";
+import { PRESET_FRAMES, useCameraStore } from "@/stores/cameraStore";
 
-export default function CharacterSelector() {
-  const {
-    selectedCharacter,
-    setSelectedCharacter,
-    showCharacter,
-    setShowCharacter,
-  } = useCameraStore();
+export default function FrameSelector() {
+  const { selectedFrame, setSelectedFrame, showFrame, setShowFrame } =
+    useCameraStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleCharacterSelect = (characterSrc: string) => {
-    setSelectedCharacter(characterSrc);
-    setShowCharacter(true);
+  const handleFrameSelect = (frameSrc: string) => {
+    setSelectedFrame(frameSrc);
+    setShowFrame(true);
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,8 +27,8 @@ export default function CharacterSelector() {
 
     // 创建文件预览URL
     const fileUrl = URL.createObjectURL(file);
-    setSelectedCharacter(fileUrl);
-    setShowCharacter(true);
+    setSelectedFrame(fileUrl);
+    setShowFrame(true);
   };
 
   const handleUploadClick = () => {
@@ -43,34 +39,34 @@ export default function CharacterSelector() {
     <div className="w-full p-4 bg-white rounded-lg shadow-md">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Label htmlFor="character-toggle">显示角色</Label>
+          <Label htmlFor="frame-toggle">显示框架</Label>
           <Switch
-            id="character-toggle"
-            checked={showCharacter}
-            onCheckedChange={setShowCharacter}
+            id="frame-toggle"
+            checked={showFrame}
+            onCheckedChange={setShowFrame}
           />
         </div>
       </div>
 
-      {/* 预设角色网格 */}
+      {/* 预设框架网格 */}
       <div className="grid grid-cols-3 gap-3 mb-4">
-        {PRESET_CHARACTERS.map((character) => (
+        {PRESET_FRAMES.map((frame) => (
           <button
             type="button"
-            key={character.id}
-            onClick={() => handleCharacterSelect(character.src)}
+            key={frame.id}
+            onClick={() => handleFrameSelect(frame.src)}
             className={`relative aspect-square rounded-lg border-2 overflow-hidden p-2 transition-all ${
-              selectedCharacter === character.src
+              selectedFrame === frame.src
                 ? "border-blue-500 bg-blue-50"
                 : "border-gray-200 hover:border-gray-300"
             }`}
           >
             <img
-              src={character.src}
-              alt={character.name}
+              src={frame.src}
+              alt={frame.name}
               className="w-full h-full object-cover"
             />
-            {selectedCharacter === character.src && (
+            {selectedFrame === frame.src && (
               <div className="absolute top-1 right-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
                 <Check className="w-3 h-3 text-white" />
               </div>
@@ -82,7 +78,7 @@ export default function CharacterSelector() {
       {/* 自定义上传按钮 */}
       <Button onClick={handleUploadClick} variant="outline" className="w-full">
         <Upload className="w-4 h-4 mr-2" />
-        上传自定义角色
+        上传自定义框架
       </Button>
 
       {/* 隐藏的文件输入 */}
