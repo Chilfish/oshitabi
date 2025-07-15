@@ -33,26 +33,6 @@
 -   **相机**: [react-webcam](https://www.npmjs.com/package/react-webcam)
 -   **构建工具**: [Vite](https://vitejs.dev/)
 
-## 本地开发
-
-1.  **克隆仓库**
-    ```bash
-    git clone https://github.com/your-username/oshitabi.git
-    cd oshitabi
-    ```
-
-2.  **安装依赖** (推荐使用 `pnpm`)
-    ```bash
-    pnpm install
-    ```
-
-3.  **启动开发服务器**
-    ```bash
-    pnpm dev
-    ```
-
-4.  在浏览器中打开 `http://localhost:5173` 即可开始使用！
-
 ## ❤️ 致谢
 
 本项目的灵感来源于 **JR東海【推し旅】** 官方活动。特此感谢其为社区带来的创意和乐趣。
