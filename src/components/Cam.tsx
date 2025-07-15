@@ -111,7 +111,7 @@ export default function Cam() {
         canvasHeight,
       );
 
-      // 4. 加载并绘制叠加图层（框架和角色）
+      // 4. 加载并绘制叠加图层（相框和角色）
       const loadPromises: Promise<HTMLImageElement>[] = [];
       if (showCharacter) {
         loadPromises.push(loadImage(selectedCharacter));
@@ -144,17 +144,17 @@ export default function Cam() {
         ctx.drawImage(image, canvasX, canvasY, canvasW, canvasH);
       };
 
-      // 绘制框架 (背景)
+      // 绘制相框 (背景)
       drawOverlay(frameImage, frameRef);
       // 绘制角色 (前景)
       drawOverlay(characterImage, characterRef);
 
       // 4. 从 Canvas 获取最终的合成图片
-      const finalImage = canvas.toDataURL("image/jpeg", 0.9);
+      const finalImage = canvas.toDataURL("image/png");
       setCapturedImage(finalImage);
     } catch (error) {
       console.error("合成图片时出错:", error);
-      alert("图片加载失败，请检查图片文件是否存在。");
+      alert("合成图片时出错:" + error);
     }
   }, [
     selectedCharacter,
@@ -169,7 +169,7 @@ export default function Cam() {
     if (!capturedImage) return;
     const link = document.createElement("a");
     link.href = capturedImage;
-    link.download = `oshitabi-photo-${Date.now()}.jpg`;
+    link.download = `oshitabi-photo-${Date.now()}`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -181,9 +181,9 @@ export default function Cam() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto flex flex-col gap-4">
+    <main className="w-full mx-auto flex flex-col md:flex-row gap-4 md:px-12">
       {/* 主内容区域 */}
-      <main className="relative w-full aspect-[3/4] bg-black rounded-lg overflow-hidden shadow-2xl border-4 border-gray-700">
+      <section className="relative w-full aspect-[3/4] bg-black rounded-md overflow-hidden shadow-2xl border-4 border-gray-700">
         <div ref={viewContainerRef} className="absolute inset-0 w-full h-full">
           {capturedImage ? (
             // 预览模式
@@ -203,10 +203,9 @@ export default function Cam() {
             />
           )}
         </div>
-      </main>
+      </section>
 
-      {/* 控制区域 */}
-      <footer className="w-full">
+      <section className="md:w-3/4 md:ml-6">
         {capturedImage ? (
           // 预览模式下的按钮
           <PreviewControls
@@ -217,30 +216,30 @@ export default function Cam() {
           // 拍照模式下的控件
           <CameraControls onTakePhoto={handleTakePhoto} />
         )}
-      </footer>
 
-      {/* 设置面板 */}
-      {!capturedImage && (
-        <Tabs
-          value={activeTab}
-          onValueChange={handleTabChange}
-          className="w-full"
-        >
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="character">角色设置</TabsTrigger>
-            <TabsTrigger value="frame">框架设置</TabsTrigger>
-          </TabsList>
-          <TabsContent value="character" className="mt-3">
-            <CharacterSelector />
-          </TabsContent>
-          <TabsContent value="frame" className="mt-3">
-            <FrameSelector />
-          </TabsContent>
-        </Tabs>
-      )}
+        {/* 设置面板 */}
+        {!capturedImage && (
+          <Tabs
+            value={activeTab}
+            onValueChange={handleTabChange}
+            className="w-full mt-8"
+          >
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="character">角色设置</TabsTrigger>
+              <TabsTrigger value="frame">相框设置</TabsTrigger>
+            </TabsList>
+            <TabsContent value="character" className="mt-3">
+              <CharacterSelector />
+            </TabsContent>
+            <TabsContent value="frame" className="mt-3">
+              <FrameSelector />
+            </TabsContent>
+          </Tabs>
+        )}
+      </section>
 
       {/* 隐藏的 Canvas，用于合成图片 */}
       <canvas ref={canvasRef} style={{ display: "none" }} />
-    </div>
+    </main>
   );
 }

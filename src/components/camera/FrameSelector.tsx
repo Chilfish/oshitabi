@@ -45,9 +45,9 @@ export default function FrameSelector() {
   return (
     <div className="w-full p-4 bg-white rounded-lg shadow-md">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold">框架设置</h3>
+        <h3 className="text-lg font-semibold">相框设置</h3>
         <div className="flex items-center gap-2">
-          <Label htmlFor="frame-toggle">显示框架</Label>
+          <Label htmlFor="frame-toggle">显示相框</Label>
           <Switch
             id="frame-toggle"
             checked={showFrame}
@@ -57,9 +57,9 @@ export default function FrameSelector() {
       </div>
 
       <div className="space-y-4">
-        {/* 框架缩放控制 */}
+        {/* 相框缩放控制 */}
         <div className="space-y-2">
-          <Label className="text-sm font-medium">框架大小</Label>
+          <Label className="text-sm font-medium">相框大小</Label>
           <div className="flex items-center gap-2">
             <ZoomOut className="w-4 h-4 text-gray-400" />
             <Slider
@@ -72,10 +72,10 @@ export default function FrameSelector() {
             />
             <ZoomIn className="w-4 h-4 text-gray-400" />
           </div>
-          <p className="text-xs text-gray-500">拖拽框架图片可以移动位置</p>
+          <p className="text-xs text-gray-500">拖拽相框图片可以移动位置</p>
         </div>
 
-        {/* 预设框架网格 */}
+        {/* 预设相框网格 */}
         <div className="grid grid-cols-3 gap-3">
           {PRESET_FRAMES.map((frame) => (
             <button
@@ -109,7 +109,7 @@ export default function FrameSelector() {
           className="w-full"
         >
           <Upload className="w-4 h-4 mr-2" />
-          上传自定义框架
+          上传自定义相框
         </Button>
 
         <p className="text-xs text-gray-500">

@@ -14,7 +14,7 @@ interface CameraState {
   characterScale: number;
   showCharacter: boolean;
 
-  // 框架相关状态
+  // 相框相关状态
   selectedFrame: string;
   frameScale: number;
   showFrame: boolean;
@@ -50,7 +50,7 @@ export const PRESET_CHARACTERS = [
   // { id: "character5", name: "角色5", src: "/taki.png" },
 ] as const;
 
-// 预设框架列表
+// 预设相框列表
 export const PRESET_FRAMES = [
   { id: "frame1", name: "推し旅", src: "/frame.png" },
   { id: "frame12", name: "mygo夏天", src: "/frame-anon.png" },
@@ -71,7 +71,7 @@ export const useCameraStore = create<CameraState>((set) => ({
   selectedFrame: PRESET_FRAMES[0].src,
   frameScale: 1,
   showFrame: true,
-  activeDragMode: "none",
+  activeDragMode: "character",
   activeTab: "character",
 
   // 操作方法

@@ -1,0 +1,36 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 定义渐变色 -->
+  <defs>
+    <linearGradient id="skyGradient" x1="128" y1="24" x2="128" y2="232" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8ECAE6"/>
+      <stop offset="1" stop-color="#BEE9FA"/>
+    </linearGradient>
+    <linearGradient id="charGradient" x1="128" y1="80" x2="128" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFC8DD"/>
+      <stop offset="1" stop-color="#FFAFCC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 主取景框 -->
+  <rect x="24" y="24" width="208" height="208" rx="40" fill="url(#skyGradient)" stroke="#1D3557" stroke-width="12"/>
+
+  <!-- 背景-山峦 -->
+  <path d="M40 210 V 160 C 60 140, 90 140, 110 160 L 140 190 C 160 170, 190 170, 216 190 V 210 H 40 Z" fill="#2A6F97" opacity="0.8"/>
+  <path d="M30 210 V 180 C 60 170, 80 170, 100 180 L 150 210 C 170 200, 200 200, 226 210 V 210 H 30 Z" fill="#0096C7" opacity="0.5"/>
+
+  <!-- 核心-亚克力透卡剪影 -->
+  <g transform="translate(0, -10)">
+    <!-- 角色剪影 -->
+    <path
+      d="M128 84 C 114 84, 108 94, 108 100 C 104 98, 96 102, 96 112 C 96 122, 102 128, 104 128 L 104 172 C 104 178, 110 180, 110 180 L 146 180 C 146 180, 152 178, 152 172 L 152 128 C 154 128, 160 122, 160 112 C 160 102, 152 98, 148 100 C 148 94, 142 84, 128 84 Z"
+      fill="url(#charGradient)"
+      stroke="#AD6C8A"
+      stroke-width="6"
+    />
+    <!-- 透卡底座 -->
+    <rect x="100" y="180" width="56" height="12" rx="4" fill="white" fill-opacity="0.6" stroke="#AD6C8A" stroke-width="4"/>
+  </g>
+
+  <!-- 装饰-闪光/对焦 -->
+  <path d="M188 64 L 192 76 L 204 80 L 192 84 L 188 96 L 184 84 L 172 80 L 184 76 Z" fill="white" fill-opacity="0.9"/>
+</svg>
