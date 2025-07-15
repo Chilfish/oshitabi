@@ -98,6 +98,15 @@ function App() {
           >
             @Chilfish
           </a>
+          ，
+          <a
+            href="https://github.com/Chilfish/oshitabi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-gray-700 dark:hover:text-gray-300"
+          >
+            Github
+          </a>
         </p>
       </footer>
     </main>

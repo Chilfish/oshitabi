@@ -43,21 +43,24 @@ interface CameraState {
 
 // 预设角色列表
 export const PRESET_CHARACTERS = [
-  { id: "character1", name: "角色1", src: "/tomori.png" },
-  { id: "character2", name: "角色2", src: "/mashiro.jpg" },
-  // { id: "character3", name: "角色3", src: "/rana.png" },
-  // { id: "character4", name: "角色4", src: "/soyo.png" },
-  // { id: "character5", name: "角色5", src: "/taki.png" },
+  { id: "character1", name: "高松灯", src: "/tomori.png" },
+  { id: "character2", name: "真白", src: "/mashiro.jpg" },
+  { id: "character3", name: "若叶睦", src: "/mutsumi.png" },
+  { id: "character4", name: "喵梦", src: "/nyamu.png" },
+  { id: "character5", name: "初华", src: "/uika.png" },
+  { id: "character6", name: "海铃", src: "/umiri.png" },
+  { id: "character7", name: "祥子", src: "/sakiko.png" },
 ] as const;
 
 // 预设相框列表
 export const PRESET_FRAMES = [
   { id: "frame1", name: "推し旅", src: "/frame.png" },
-  { id: "frame12", name: "mygo夏天", src: "/frame-anon.png" },
-  { id: "frame13", name: "mygo夏天", src: "/frame-tomori.png" },
-  { id: "frame14", name: "mygo夏天", src: "/frame-taki.png" },
-  { id: "frame15", name: "mygo夏天", src: "/frame-soyo.png" },
-  { id: "frame16", name: "mygo夏天", src: "/frame-rana.png" },
+  { id: "frame2", name: "mygo", src: "/mygo.png" },
+  { id: "frame3", name: "mygo夏天", src: "/frame-anon.png" },
+  { id: "frame4", name: "mygo夏天", src: "/frame-tomori.png" },
+  { id: "frame5", name: "mygo夏天", src: "/frame-taki.png" },
+  { id: "frame6", name: "mygo夏天", src: "/frame-soyo.png" },
+  { id: "frame7", name: "mygo夏天", src: "/frame-rana.png" },
 ] as const;
 
 export const useCameraStore = create<CameraState>((set) => ({
